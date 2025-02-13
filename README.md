@@ -1,12 +1,14 @@
 # Train Route Manager 🚆
-A professional and responsive web application for managing train routes. Users can dynamically insert, delete, and search for stations.
+
+A Python-based train route management system using a doubly linked list. This program allows users to dynamically insert, delete, and search for stations.
 
 ## Features
 - 🚆 Add new stations at any position
 - ❌ Remove stations from the route
 - 🔍 Search for stations
-- 📱 Fully responsive design
-- ⚡ Built with HTML, CSS, and JavaScript
+- ⚡ Implemented using Doubly Linked List
 
-## Installation
+## Installation & Usage
 1. Clone the repository:
+   ```sh
+   git clone https://github.com/your-username/train-route-manager.git
