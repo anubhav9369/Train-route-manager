@@ -1,17 +1,18 @@
-# Train Route Manager 🚆
+# Train Route Management 🚆
 
-A Python-based train route management system using a doubly linked list. This program allows users to dynamically insert, delete, and search for stations.
+A web-based Train Route Management System built using React. Users can dynamically insert, delete, and search for train stations.
 
 ## Features
 - 🚆 Add new stations at any position
 - ❌ Remove stations from the route
 - 🔍 Search for stations
-- ⚡ Implemented using Doubly Linked List
+- 📱 Fully responsive design
+- ⚡ Built using React with Tailwind CSS
 
 ## Installation & Usage
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/train-route-manager.git
+   git clone https://github.com/anubhav9369/Train-route-management.git
 
 ## Navigate to the project folder:
 cd train-route-manager
