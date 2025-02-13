@@ -1,0 +1,154 @@
+class Node:
+    def __init__(self, station_name):
+        self.station_name = station_name
+        self.prev = None
+        self.next = None
+
+class DoublyLinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert_station(self, station_name, after_station=None):
+        new_node = Node(station_name)
+        if not self.head:  # If the list is empty
+            self.head = new_node
+            self.tail = new_node
+        else:
+            if after_station is None:  # Insert at the end if no station is specified
+                self.tail.next = new_node
+                new_node.prev = self.tail
+                self.tail = new_node
+            else:
+                current = self.head
+                while current:
+                    if current.station_name == after_station:
+                        new_node.next = current.next
+                        new_node.prev = current
+                        current.next = new_node
+                        if new_node.next:  # If not inserting at the end
+                            new_node.next.prev = new_node
+                        else:  # If inserting at the end
+                            self.tail = new_node
+                        return
+                    current = current.next
+                print(f"Station {after_station} not found. Inserting at the end instead.")
+                self.tail.next = new_node
+                new_node.prev = self.tail
+                self.tail = new_node
+
+    def delete_station(self, station_name):
+        current = self.head
+        while current:
+            if current.station_name == station_name:
+                if current.prev:
+                    current.prev.next = current.next
+                if current.next:
+                    current.next.prev = current.prev
+                if current == self.head:  # If it's the head
+                    self.head = current.next
+                if current == self.tail:  # If it's the tail
+                    self.tail = current.prev
+                return True
+            current = current.next
+        return False
+
+    def search_station(self, station_name):
+        current = self.head
+        position = 0
+        while current:
+            if current.station_name == station_name:
+                return position
+            current = current.next
+            position += 1
+        return -1  # Not found
+
+    def display_route(self):
+        current = self.head
+        route = []
+        while current:
+            route.append(current.station_name)
+            current = current.next
+        return route
+
+    def next_station(self, station_name):
+        current = self.head
+        while current:
+            if current.station_name == station_name:
+                return current.next.station_name if current.next else None
+            current = current.next
+        return None
+
+    def previous_station(self, station_name):
+        current = self.head
+        while current:
+            if current.station_name == station_name:
+                return current.prev.station_name if current.prev else None
+            current = current.next
+        return None
+
+def main():
+    train_route = DoublyLinkedList()
+
+    # Sample stations
+    train_route.insert_station("Station A")
+    train_route.insert_station("Station B")
+    train_route.insert_station("Station C")
+    train_route.insert_station("Station D")
+
+    while True:
+        print("\nTrain Route Management System")
+        print("1. View Full Route")
+        print("2. Insert Station")
+        print("3. Delete Station")
+        print("4. Search for Station")
+        print("5. Display Next Station")
+        print("6. Display Previous Station")
+        print("7. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            print("Full Route:", ', '.join(train_route.display_route()))
+        elif choice == '2':
+            station_name = input("Enter station name to insert: ")
+            after_station = input("Insert after which station? (Leave blank to insert at the end): ")
+            if after_station.strip() == "":
+                after_station = None
+            train_route.insert_station(station_name, after_station)
+            print(f"Inserted {station_name}.")
+        elif choice == '3':
+            station_name = input("Enter station name to delete: ")
+            if train_route.delete_station(station_name):
+                print(f"Deleted {station_name}.")
+            else:
+                print(f"Station {station_name} not found.")
+        elif choice == '4':
+            station_name = input("Enter station name to search: ")
+            position = train_route.search_station(station_name)
+            if position != -1:
+                print(f"Station {station_name} found at position {position}.")
+            else:
+                print(f"Station {station_name} not found.")
+        elif choice == '5':
+            station_name = input("Enter station name to find next station: ")
+            next_station = train_route.next_station(station_name)
+            if next_station:
+                print(f"Next station after {station_name} is {next_station}.")
+            else:
+                print(f"No next station found after {station_name}.")
+        elif choice == '6':
+            station_name = input("Enter station name to find previous station: ")
+            prev_station = train_route.previous_station(station_name)
+            if prev_station:
+                print(f"Previous station before {station_name} is {prev_station}.")
+            else:
+                print(f"No previous station found before {station_name}.")
+        elif choice == '7':
+            print("Exiting the system.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
