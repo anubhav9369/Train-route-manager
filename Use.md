@@ -1,6 +1,6 @@
 # Installation & Usage
 1. Clone the repository:
-   git clone https://github.com/anubhav9369/Train-route-management.git
+   git clone https://github.com/anubhav9369/Train-route-manager.git
 
 # Navigate to the project folder:
 cd train-route-manager
